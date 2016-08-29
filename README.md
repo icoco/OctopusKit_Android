@@ -4,11 +4,11 @@ OctopusKit is a simplicity but graceful solution for invoke RESTful web service 
 
 Gradle 
 Add dependency.
-
+<code>
 dependencies {
   compile 'net.ixkit:octopuskit:1.0.1'
 }
-
+</code>
 ##Notice
 
 Please check the demo app also the TestCase file, understand the usage then enjoy the way~
