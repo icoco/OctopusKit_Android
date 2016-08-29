@@ -2,13 +2,15 @@
 OctopusKit is a simplicity but graceful solution for invoke RESTful web service APIs,it can help coder develop app based MVC pattern, it can use for big team development; Another benift is that it also can be use to auto generate web service class file if use some M2T tools, save cost and raplidy the app develop progress.
 ## Usage
 
-Gradle 
+ 
 Add dependency.
-<code>
+
+```
 dependencies {
   compile 'net.ixkit:octopuskit:1.0.1'
 }
-</code>
+
+```
 ##Notice
 
 Please check the demo app also the TestCase file, understand the usage then enjoy the way~
