@@ -17,14 +17,13 @@
  	
     <TextView
         android:id="@+id/text_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dp"
         android:layout_weight="0.71"
-        android:text="TextView"
-         
-        android:textSize="20sp" />
+
+        android:textSize="16sp" />
 
     
 

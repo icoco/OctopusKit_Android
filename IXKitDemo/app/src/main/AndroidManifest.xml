@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.iapp" >
+    package="com.ixkit.app" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -18,18 +18,17 @@
         android:theme="@style/AppTheme" >
 
         <activity
-            android:name=".cart.ui.HomeActivity"
-            android:label="Opencart" >
+            android:name=".ui.GroupListActivity"
+            android:label="iXKit" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".cart.ui.CategoriesActivity"
-            android:label="Categories" >
+            android:name=".ui.DetailActivity"
+            android:label="Detail" >
         </activity>
 
 

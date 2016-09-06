@@ -1,1 +1,2 @@
-include ':app',  ':ixkit', ':pull2refresh'
+//include ':app',   ':sdk',':pull2refresh'
+include ':app', ':octopuskit',  ':sdk'

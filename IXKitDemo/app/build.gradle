@@ -2,21 +2,23 @@ apply plugin: 'com.android.application'
 
 
 apply plugin: 'android-apt'
-//apply plugin: 'robolectric'
+ 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion '23.0.3'
     dexOptions {
         jumboMode = true
     }
     defaultConfig {
-        applicationId "com.ixkit.ixkitdemo"
+        applicationId "com.ixkit.app"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
 
         multiDexEnabled true
+
+        testInstrumentationRunner "com.android.test.runner.MultiDexTestRunner"
     }
     buildTypes {
         release {
@@ -26,31 +28,40 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs' //this way we can find the .aar file in libs folder
+    }
+}
+
 dependencies {
-    compile project(':ixkit')
-    compile project(':pull2refresh')
+    //compile project(':octopuskit')
+    compile 'net.ixkit:octopuskit:1.0.1'
+
+    compile project(':sdk')
+
+   // compile project(':pull2refresh')
+    compile(name:'pull2refresh', ext:'aar')
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
-
     compile 'com.android.support:appcompat-v7:23.0.1'
-/*
-    testCompile "junit:junit:4.10"
-    testCompile "org.assertj:assertj-core:1.7.0"
-    testCompile "org.robolectric:robolectric:${robolectricVersion}"*/
-
-    apt "org.androidannotations:androidannotations:3.0.+"
-    compile "org.androidannotations:androidannotations-api:3.0.+"
 
 
+   // apt "org.androidannotations:androidannotations:3.0.+"
+   // compile 'org.androidannotations:androidannotations-api:3.0.+'
     androidTestCompile 'junit:junit:4.+'
- //   androidTestCompile ('org.robolectric:robolectric:3.+')
-//   androidTestCompile 'com.squareup:fest-android:1.+'
+
+    compile 'com.diegocarloslima:fgelv:0.1.+@aar'
+
+    compile 'com.orhanobut:logger:1.15'
+
+
 }
 
 
 apt {
     arguments {
 //        androidManifestFile variant.processResources.manifestFile
-        resourcePackageName 'com.iapp'
+        resourcePackageName 'com.ixkit.app'
     }
 }
