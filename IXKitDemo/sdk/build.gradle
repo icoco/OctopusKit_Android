@@ -1,48 +1,53 @@
 apply plugin: 'com.android.library'
 
-apply plugin: 'android-apt'
-
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.3'
+    compileSdkVersion 28
+    //testOptions.unitTests.includeAndroidResources = true
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 23
+        minSdkVersion 21
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
-        //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        //testInstrumentationRunner "com.android.test.runner.MultiDexTestRunner"
-        testInstrumentationRunner "org.robolectric.RobolectricGradleTestRunner"
 
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
     }
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    productFlavors {
-    }
-
 
 }
 
 dependencies {
-    compile 'com.android.volley:volley:1.0.0'
-    //compile project(':octopuskit')
-    compile 'net.ixkit:octopuskit:1.0.1'
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-  //  compile 'com.android.support:appcompat-v7:23.0.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    testCompile 'junit:junit:4.12'
-    testCompile "org.robolectric:robolectric:3.1"
-    testCompile "org.robolectric:shadows-httpclient:3.0"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    // Unit Test
+    testImplementation "org.robolectric:robolectric:$rootProject.ext.robolectricVersion"
+    testImplementation "org.robolectric:shadows-httpclient:3.0"
 
-    testCompile 'com.google.truth:truth:0.28'
+    testImplementation 'com.google.truth:truth:0.28'
 
+    // Network lib
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-scalars:$rootProject.ext.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.gson_version"
+
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+
+    // Logger
+    implementation 'com.orhanobut:logger:2.2.0'
+
+    // vendor
+    implementation project(path: ':octopuskit')
 }
-
-
 

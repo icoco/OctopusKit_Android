@@ -7,7 +7,7 @@ Add dependency.
 
 ```
 dependencies {
-  compile 'net.ixkit:octopuskit:1.0.1'
+  implementation "net.ixkit:octopuskit:1.0.3"
 }
 
 ```
@@ -15,7 +15,7 @@ dependencies {
 
 Please check the demo app also the TestCase file, understand the usage then enjoy the way~
 
-It based Volley but also can integreate with other network lib
+It based retrofit2 but also can integreate with other network library.
 
 ## License
 

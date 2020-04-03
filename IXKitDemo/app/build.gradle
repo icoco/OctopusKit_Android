@@ -1,67 +1,29 @@
 apply plugin: 'com.android.application'
 
-
-apply plugin: 'android-apt'
- 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.3'
-    dexOptions {
-        jumboMode = true
-    }
+    compileSdkVersion 28
     defaultConfig {
-        applicationId "com.ixkit.app"
-        minSdkVersion 15
-        targetSdkVersion 23
+        applicationId "com.ixkit.demo"
+        minSdkVersion 21
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
-        multiDexEnabled true
-
-        testInstrumentationRunner "com.android.test.runner.MultiDexTestRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
 
-repositories {
-    flatDir {
-        dirs 'libs' //this way we can find the .aar file in libs folder
-    }
-}
-
 dependencies {
-    //compile project(':octopuskit')
-    compile 'net.ixkit:octopuskit:1.0.1'
-
-    compile project(':sdk')
-
-   // compile project(':pull2refresh')
-    compile(name:'pull2refresh', ext:'aar')
-
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.0.1'
-
-
-   // apt "org.androidannotations:androidannotations:3.0.+"
-   // compile 'org.androidannotations:androidannotations-api:3.0.+'
-    androidTestCompile 'junit:junit:4.+'
-
-    compile 'com.diegocarloslima:fgelv:0.1.+@aar'
-
-    compile 'com.orhanobut:logger:1.15'
-
-
-}
-
-
-apt {
-    arguments {
-//        androidManifestFile variant.processResources.manifestFile
-        resourcePackageName 'com.ixkit.app'
-    }
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.material:material:1.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }

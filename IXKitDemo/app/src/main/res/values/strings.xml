@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">iXKit</string>
-     <string name="android_versions_title"> Versions</string>
-    <string name="android_versions_description">OctopusKit 1.0.1</string>
-
+    <string name="app_name">iXKitDemo</string>
+    <string name="action_settings">Settings</string>
 </resources>

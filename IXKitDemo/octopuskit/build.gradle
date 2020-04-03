@@ -1,120 +1,66 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.novoda.bintray-release' // must be applied after your artifact generating plugin (eg. java / com.android.library)
+
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.3'
-
+    compileSdkVersion 28
 
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0.1"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 3
+        versionName "1.0.3"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
     }
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-}
-repositories {
-    jcenter()
+
+//    configurations.all {
+//        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+//    }
 }
 
 dependencies {
-    compile 'com.android.volley:volley:1.0.0'
-    //compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    //androidTestImplementation 'com.google.code.findbugs:jsr305:1.3.9'
+
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-scalars:$rootProject.ext.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+
+
+    implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
+    implementation 'com.google.guava:guava:23.4-jre'
+
+    implementation 'com.orhanobut:logger:2.2.0'
 }
 
-/////////////////////////////////////////////////////////////////
-// 项目引用的版本号，比如compile 'net.ixkit:octopuskit:1.0.1'中的1.0.1就是这里配置的。
-version = "1.0.1"
-
-// 定义两个链接，下面会用到。
-def siteUrl = 'https://github.com/icoco/OctopusKit_Android' // 项目主页。
-def gitUrl = 'https://github.com/icoco/OctopusKit_Android.git' // Git仓库的url。
 
 
-// 唯一包名，比如compile 'net.ixkit:octopuskit:1.0.1'中的net.ixkit就是这里配置的。
-group = "net.ixkit"
-install {
-    repositories.mavenInstaller {
-        // 生成pom.xml和参数
-        pom {
-            project {
-                packaging 'aar'
-                // 项目描述，复制我的话，这里需要修改。
-                name 'OctopusKit'// 可选，项目名称。
-                description 'OctopusKit is a simplicity but graceful solution for invoke RESTful web service APIs.'// 可选，项目描述。
-                url siteUrl // 项目主页，这里是引用上面定义好。
 
-                // 软件开源协议。
-                licenses {
-                    license {
-                        name 'The MIT license'
-                        url 'https://github.com/icoco/OctopusKit_Android/blob/master/LICENSE'
-                    }
-                }
-
-                //填写开发者基本信息，复制我的，这里需要修改。
-                developers {
-                    developer {
-                        id 'icoco' // 开发者的id。
-                        name 'RobinCheung' // 开发者名字。
-                        email 'iRobinCheung@hotmail.com' // 开发者邮箱。
-                    }
-                }
-
-                // SCM，复制我的，这里不需要修改。
-                scm {
-                    connection gitUrl // Git仓库地址。
-                    developerConnection gitUrl // Git仓库地址。
-                    url siteUrl // 项目主页。
-                }
-            }
-        }
-    }
-}
-// 生成jar包的task，不需要修改。
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-// 生成jarDoc的task，不需要修改。
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    // destinationDir = file("../javadoc/")
-    failOnError false // 忽略注释语法错误，如果用jdk1.8你的注释写的不规范就编译不过。
-}
-// 生成javaDoc的jar，不需要修改。
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-artifacts {
-    archives javadocJar
-    archives sourcesJar
+publish {
+    userOrg = 'ixkit'
+    groupId = 'net.ixkit'
+    artifactId = 'OctopusKit'
+    publishVersion = '1.0.3'
+    licences = ["The MIT Licenses"]
+    desc = 'OctopusKit is a simplicity but graceful solution for invoke RESTful web service APIs.'
+    website = 'https://github.com/icoco/OctopusKit_Android'
 }
 
-// 这里是读取Bintray相关的信息，我们上传项目到github上的时候会把gradle文件传上去，所以不要把帐号密码的信息直接写在这里，写在local.properties中，这里动态读取。
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-bintray {
-    user = properties.getProperty("bintray.user") // Bintray的用户名。
-    key = properties.getProperty("bintray.apikey") // Bintray刚才保存的ApiKey。
-
-    configurations = ['archives']
-    pkg {
-        repo = "maven"  // 上传到maven库。
-        name = "OctopusKit"  // 发布到Bintray上的项目名字。
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = ["MIT"]
-        publish = true // 是否是公开项目。
-    }
-}

@@ -1,2 +1,2 @@
-//include ':app',   ':sdk',':pull2refresh'
-include ':app', ':octopuskit',  ':sdk'
+include ':app', ':octopuskit', ':sdk'
+rootProject.name='iXKitDemo'
