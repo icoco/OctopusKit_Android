@@ -1,5 +1,10 @@
 # OctopusKit_Android
 OctopusKit is a simplicity but graceful solution for invoke RESTful web service APIs,it can help coder develop app based MVC pattern, it can use for big team development; Another benift is that it also can be use to auto generate web service class file if use some M2T tools, save cost and raplidy the app develop progress.
+
+## Layer Diagram
+
+![avatar](https://github.com/icoco/OctopusKit_Android/img/layer.png)
+
 ## Usage
 
  
