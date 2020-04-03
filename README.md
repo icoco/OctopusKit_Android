@@ -3,7 +3,7 @@ OctopusKit is a simplicity but graceful solution for invoke RESTful web service 
 
 ## Layer Diagram
 
-![avatar](https://github.com/icoco/OctopusKit_Android/img/layer.png)
+![](https://github.com/icoco/OctopusKit_Android/blob/master/img/layer.png)
 
 ## Usage
 
