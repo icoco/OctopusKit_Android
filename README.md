@@ -12,7 +12,7 @@ Add dependency.
 
 ```
 dependencies {
-  implementation "net.ixkit:octopuskit:1.0.3"
+  implementation "net.ixkit:OctopusKit:1.0.3"
 }
 
 ```
